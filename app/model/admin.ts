@@ -1,8 +1,8 @@
-import { Application } from 'egg'
-import * as moment from 'moment'
+import { Application } from 'egg';
+import * as moment from 'moment';
 
 export default (app: Application) => {
-    const { Schema, model } = app.mongoose
+    const { Schema, model } = app.mongoose;
     const AdminSchema = new Schema({
         token: { type: String },
         username: { type: String },
@@ -14,18 +14,18 @@ export default (app: Application) => {
         role: { type: String, enum: ['admin', 'author'], default: 'admin' },
         role_name: { type: String, enum: ['管理员', '用户'], default: '管理员' },
         enable: { type: Boolean, default: true }
-    })
+    });
 
-    AdminSchema.virtual('create_time').get(function() {
+    AdminSchema.virtual('create_time').get(function () {
         let create_time: Date | string = new Date(
             parseInt(String(this._id).substring(0, 8), 16) * 1000
-        )
-        create_time = moment(create_time).format('YYYY-MM-DD HH:MM:SS')
-        return create_time
-    })
-    AdminSchema.set('toObject', { getters: true, virtuals: true })
+        );
+        create_time = moment(create_time).format('YYYY-MM-DD HH:MM:SS');
+        return create_time;
+    });
+    AdminSchema.set('toObject', { getters: true, virtuals: true });
 
-    const Admin = model('admin', AdminSchema)
+    const Admin = model('admin', AdminSchema);
 
-    return Admin
-}
+    return Admin;
+};
