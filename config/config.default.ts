@@ -38,11 +38,24 @@ export default (appInfo: EggAppInfo) => {
     };
     // jwt serectKey
     const jwt_key = 'diygod';
+    // 七牛云图床相关配置
+    const qiniu = {
+        ACCESS_KEY: 'MAjrtFSs6xzKftALyS9gdeTdWEUdg-zhjVKAdY5M',
+        SECRET_KEY: 'iFdLkSk9lGryNXlFdXy4VTC49IrrYUO0ro45arBC',
+        options: {
+            scope: 'yui-graduation-project',
+            returnBody:
+                '{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket)","name":"$(x:name)"}',
+            expires: 3600
+        },
+        domain: 'http://q7lp77n6c.bkt.clouddn.com'
+    };
 
     return {
         ...config,
         captchaParams,
         bg,
-        jwt_key
+        jwt_key,
+        qiniu
     };
 };

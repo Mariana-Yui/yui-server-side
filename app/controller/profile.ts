@@ -19,4 +19,10 @@ export default class ProfileController extends Controller {
         const res = await service.profile.checkPassword(ctx, username, password);
         ctx.body = res;
     }
+    public async updatePassword() {
+        const { ctx, service } = this;
+        const { username, password } = ctx.request.body;
+        const res = await service.profile.updateProfile(ctx, username, password);
+        ctx.body = res;
+    }
 }

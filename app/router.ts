@@ -9,4 +9,5 @@ export default (app: Application) => {
     router.get('/profile/checkUsername', controller.profile.checkUserExist);
     router.post('/profile/updateProfile', controller.profile.updateProfile);
     router.post('/profile/checkPassword', controller.profile.checkPassword);
+    router.post('/profile/updatePassword', controller.profile.updatePassword);
 };

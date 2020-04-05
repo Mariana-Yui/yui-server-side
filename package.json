@@ -34,11 +34,13 @@
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.28",
+    "qiniu": "^7.3.0",
     "svg-captcha": "^1.4.0"
   },
   "devDependencies": {
     "@types/mocha": "^7.0.2",
     "@types/node": "^13.9.5",
+    "@types/qiniu": "^7.0.1",
     "@types/supertest": "^2.0.8",
     "autod": "^3.1.0",
     "autod-egg": "^1.1.0",

@@ -4,10 +4,12 @@
 import 'egg';
 import ExportLogin from '../../../app/controller/login';
 import ExportProfile from '../../../app/controller/profile';
+import ExportQiniu from '../../../app/controller/qiniu';
 
 declare module 'egg' {
   interface IController {
     login: ExportLogin;
     profile: ExportProfile;
+    qiniu: ExportQiniu;
   }
 }

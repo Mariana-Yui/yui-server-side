@@ -45,4 +45,17 @@ export default class ProfileService extends Service {
         }
         return utils.json(-1, '发生未知错误');
     }
+    public async updatePassword(ctx: Context, username: string, password: string) {
+        const { Admin } = ctx.model;
+        try {
+            const userInfo = await Admin.findOneAndUpdate({ username }, { password });
+            if (userInfo) {
+                return utils.json(0, '密码修改成功');
+            }
+            return utils.json(-1, '修改密码失败');
+        } catch (error) {
+            console.log(error);
+        }
+        return utils.json(0, '发生未知错误');
+    }
 }

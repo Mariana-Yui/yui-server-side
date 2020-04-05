@@ -25,6 +25,7 @@ export default function Authentication(option: any) {
                     }
                 }
             } catch (error) {
+                console.log(error);
                 ctx.status = 401;
                 ctx.body = { code: -1, message: 'token无效' };
                 return;
