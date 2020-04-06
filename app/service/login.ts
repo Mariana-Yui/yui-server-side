@@ -49,8 +49,12 @@ export default class LoginService extends Service {
                         const token = jwt.sign({ username }, ctx.app.config.jwt_key, {
                             expiresIn: '1h'
                         });
-                        // 存储token
-                        let updatedAdmin = await Admin.findOneAndUpdate({ username }, { token }); // query update
+                        // 存储token, new要设为true才会返回新的数据, 否则默认返回旧数据
+                        let updatedAdmin = await Admin.findOneAndUpdate(
+                            { username },
+                            { token },
+                            { new: true }
+                        ); // query update
                         updatedAdmin = _.omit(updatedAdmin.toObject(), ['password', '__v']); // toObject is necessary
                         return utils.json(0, '验证通过', updatedAdmin);
                     }
