@@ -10,4 +10,5 @@ export default (app: Application) => {
     router.post('/profile/updateProfile', controller.profile.updateProfile);
     router.post('/profile/checkPassword', controller.profile.checkPassword);
     router.post('/profile/updatePassword', controller.profile.updatePassword);
+    router.get('/qiniu/getUpToken', controller.qiniu.getUpToken);
 };
