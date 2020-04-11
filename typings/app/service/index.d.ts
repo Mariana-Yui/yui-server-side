@@ -10,6 +10,7 @@ import ExportLogin from '../../../app/service/login';
 import ExportPermission from '../../../app/service/permission';
 import ExportProfile from '../../../app/service/profile';
 import ExportQiniu from '../../../app/service/qiniu';
+import ExportUserAdmin from '../../../app/service/user/admin';
 
 declare module 'egg' {
   interface IService {
@@ -17,5 +18,8 @@ declare module 'egg' {
     permission: AutoInstanceType<typeof ExportPermission>;
     profile: AutoInstanceType<typeof ExportProfile>;
     qiniu: AutoInstanceType<typeof ExportQiniu>;
+    user: {
+      admin: AutoInstanceType<typeof ExportUserAdmin>;
+    }
   }
 }
