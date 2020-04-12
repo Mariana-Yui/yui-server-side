@@ -19,4 +19,21 @@ export default class AdminController extends Controller {
         const res = await service.user.admin.toggleStatus(ctx, admin, username, enable);
         ctx.body = res;
     }
+    public async getAdminByKeywords() {
+        const { ctx, service } = this;
+        const { input: keyword, size, page } = ctx.request.query;
+        const res = await service.user.admin.getAdminByKeywords(
+            ctx,
+            keyword,
+            Number(size),
+            Number(page)
+        );
+        ctx.body = res;
+    }
+    public async createNewAdmin() {
+        const { ctx, service } = this;
+        const { info } = ctx.request.body;
+        const res = await service.user.admin.createNewAdmin(ctx, info);
+        ctx.body = res;
+    }
 }

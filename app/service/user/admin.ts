@@ -3,10 +3,10 @@ import * as _ from 'lodash';
 import utils from '../../utils';
 
 export default class AdminService extends Service {
-    public async getAdminList(ctx: Context, size: number, page: number) {
+    public async getAdminList(ctx: Context, size: number, page: number, filter?: any) {
         const { Admin } = ctx.model;
         try {
-            let users = await Admin.find()
+            let users = await Admin.find(filter)
                 .skip(size * (page - 1))
                 .limit(size)
                 .sort({
@@ -44,6 +44,35 @@ export default class AdminService extends Service {
         } catch (error) {
             console.log(error);
             return utils.json(-1, '修改失败');
+        }
+    }
+    public async getAdminByKeywords(ctx: Context, keyword: string, size: number, page: number) {
+        try {
+            const filter = {
+                $or: [
+                    { username: { $regex: keyword, $options: 'i' } },
+                    { phone: { $regex: keyword, $options: 'i' } },
+                    { email: { $regex: keyword, $options: 'i' } }
+                ]
+            };
+            if (keyword === '') {
+                return await this.getAdminList(ctx, size, page);
+            }
+            return await this.getAdminList(ctx, size, page, filter);
+        } catch (error) {
+            console.log(error);
+            return utils.json(-1, '查找失败');
+        }
+    }
+    public async createNewAdmin(ctx: Context, info: any) {
+        const { Admin } = ctx.model;
+        try {
+            let user = await Admin.create(info);
+            user = _.omit(user.toObject(), ['token', 'password', '__v']);
+            return utils.json(0, '添加新用户成功', user);
+        } catch (error) {
+            console.log(error);
+            return utils.json(-1, '添加新用户失败, 请刷新重试');
         }
     }
 }

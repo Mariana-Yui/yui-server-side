@@ -14,4 +14,6 @@ export default (app: Application) => {
     router.get('/user/admin/getlist', controller.user.admin.getAdminList);
     router.get('/user/admin/gettotal', controller.user.admin.getTotalNumber);
     router.get('/user/admin/togglestatus', controller.user.admin.toggleStatus);
+    router.get('/user/admin/getadminbykeywords', controller.user.admin.getAdminByKeywords);
+    router.post('/user/admin/createnewadmin', controller.user.admin.createNewAdmin);
 };
