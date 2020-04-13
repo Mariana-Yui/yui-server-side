@@ -13,7 +13,8 @@ export default (app: Application) => {
         description: { type: String, default: app.config.description },
         role: { type: String, enum: ['admin', 'author'], default: 'admin' },
         role_name: { type: String, enum: ['管理员', '用户'], default: '管理员' },
-        enable: { type: Boolean, default: true }
+        enable: { type: Boolean, default: true },
+        more_info: { type: Schema.Types.ObjectId, ref: 'User' }
     });
 
     AdminSchema.virtual('create_time').get(function () {
@@ -25,7 +26,7 @@ export default (app: Application) => {
     });
     AdminSchema.set('toObject', { getters: true, virtuals: true });
 
-    const Admin = model('admin', AdminSchema);
+    const Admin = model('Admin', AdminSchema);
 
     return Admin;
 };

@@ -16,4 +16,5 @@ export default (app: Application) => {
     router.get('/user/admin/togglestatus', controller.user.admin.toggleStatus);
     router.get('/user/admin/getadminbykeywords', controller.user.admin.getAdminByKeywords);
     router.post('/user/admin/createnewadmin', controller.user.admin.createNewAdmin);
+    router.get('/article/publish/getallusername', controller.article.publish.getAllUsername);
 };

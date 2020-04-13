@@ -10,6 +10,7 @@ import ExportLogin from '../../../app/service/login';
 import ExportPermission from '../../../app/service/permission';
 import ExportProfile from '../../../app/service/profile';
 import ExportQiniu from '../../../app/service/qiniu';
+import ExportArticlePublish from '../../../app/service/article/publish';
 import ExportUserAdmin from '../../../app/service/user/admin';
 
 declare module 'egg' {
@@ -18,6 +19,9 @@ declare module 'egg' {
     permission: AutoInstanceType<typeof ExportPermission>;
     profile: AutoInstanceType<typeof ExportProfile>;
     qiniu: AutoInstanceType<typeof ExportQiniu>;
+    article: {
+      publish: AutoInstanceType<typeof ExportArticlePublish>;
+    }
     user: {
       admin: AutoInstanceType<typeof ExportUserAdmin>;
     }

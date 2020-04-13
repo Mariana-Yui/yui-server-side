@@ -6,7 +6,8 @@ export default () => {
     config.mongoose = {
         url: 'mongodb://127.0.0.1/yui',
         options: {
-            useFindAndModify: false
+            useFindAndModify: false,
+            useUnifiedTopology: true
         }
     };
     // 默认admin头像
