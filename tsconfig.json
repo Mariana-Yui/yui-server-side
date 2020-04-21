@@ -21,7 +21,8 @@
         "skipDefaultLibCheck": true,
         "inlineSourceMap": true,
         "importHelpers": true,
-        "noImplicitThis": false
+        "noImplicitThis": false,
+        "strictNullChecks": false
     },
     "exclude": ["app/public", "app/views", "node_modules*"]
 }

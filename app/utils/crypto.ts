@@ -19,7 +19,7 @@ const rsaEncrypt = (buffer, key) => {
 
 const weapi = (object: any) => {
     const text = JSON.stringify(object);
-    const secretKey = crypto.randomBytes(16).map((n: any) => base62.charAt(n % 62).charCodeAt());
+    const secretKey = crypto.randomBytes(16).map((n: any) => base62.charAt(n % 62).charCodeAt(0));
     return {
         params: aesEncrypt(
             Buffer.from(aesEncrypt(Buffer.from(text), 'cbc', presetKey, iv).toString('base64')),

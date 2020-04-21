@@ -1,8 +1,14 @@
 import { Controller } from 'egg';
+import utils from '../../utils';
 
 export default class MusicController extends Controller {
-    public async loginByPhone() {
+    public async searchMusicByKeywords() {
         const { ctx, service } = this;
-        await service.music.loginByPhone;
+        const { query, body } = ctx.request;
+        ctx.state.query = Object.assign({}, query, body, {
+            cookie: utils.convertToObject(ctx.get('Cookie'))
+        });
+        const res = await service.article.music.searchMusicByKeywords(ctx, 0);
+        ctx.body = res;
     }
 }

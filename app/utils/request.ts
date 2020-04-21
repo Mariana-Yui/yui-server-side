@@ -1,6 +1,6 @@
 import encrypt from './crypto';
-import PacProxyAgent from 'pac-proxy-agent';
-import request from 'request';
+import * as PacProxyAgent from 'pac-proxy-agent';
+import * as request from 'request';
 import * as queryString from 'querystring';
 import * as zlib from 'zlib';
 
@@ -32,9 +32,9 @@ const chooseUserAgent = (ua: string | undefined) => {
     return userAgentList[index];
 };
 
-const createRequest = (method, url, data, options) => {
+const createRequest = (method, url, data, options): Promise<any> => {
     return new Promise((resolve, reject) => {
-        const headers = { 'User-Agent': chooseUserAgent(options.ua) };
+        const headers = { 'User-Agent': chooseUserAgent(options.ua) } as any;
         if (method.toUpperCase() === 'POST') {
             headers['Content-Type'] = 'application/x-www-form-urlencoded';
         }
@@ -83,7 +83,7 @@ const createRequest = (method, url, data, options) => {
                 requestId: `${Date.now()}_${Math.floor(Math.random() * 1000)
                     .toString()
                     .padStart(4, '0')}`
-            };
+            } as any;
             if (cookie.MUSIC_U) header.MUSIC_U = cookie.MUSIC_U;
             if (cookie.MUSIC_A) header.MUSIC_A = cookie.MUSIC_A;
             headers.Cookie = Object.keys(header)
@@ -96,18 +96,18 @@ const createRequest = (method, url, data, options) => {
             url = url.replace(/\w*api/, 'eapi');
         }
 
-        const answer = { status: 500, body: {}, cookie: [] };
+        const answer = { status: 500, body: {}, cookie: [] } as any;
         const settings = {
             method,
             url,
             headers,
             body: queryString.stringify(data)
-        };
+        } as any;
 
         if (options.crypto === 'eapi') settings.encoding = null;
 
         if (/\.pac$/i.test(options.proxy)) {
-            settings.agent = new PacProxyAgent(options.proxy);
+            settings.agent = new (PacProxyAgent as any)(options.proxy);
         } else {
             settings.proxy = options.proxy;
         }
@@ -145,7 +145,7 @@ const createRequest = (method, url, data, options) => {
                         return false;
                     }
 
-                    answer.body = JSON.parse(body);
+                    answer.body = JSON.parse(body) as any;
                     answer.status = answer.body.code || res.statusCode;
                     if (answer.body.code === 502) {
                         answer.status = 200;
