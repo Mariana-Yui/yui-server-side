@@ -8,6 +8,13 @@ export default (app: Application) => {
         author_info: { type: Schema.Types.ObjectId, ref: 'Admin' },
         author: { type: String, required: true },
         abstract: { type: String }, // 书籍摘要
+        music_info: {
+            name: { type: String, required: true },
+            singer: { type: String },
+            url: { type: String, required: true },
+            cover: { type: String },
+            album: { type: String }
+        },
         content: { type: String, required: true },
         comment: [{ type: Schema.Types.ObjectId, ref: 'MusicComment' }],
         status: { type: Number, default: 0 },

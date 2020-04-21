@@ -1,7 +1,7 @@
 import { Application } from 'egg';
 
 export default (app: Application) => {
-    const { controller, router } = app;
+    const { controller, router, middleware } = app;
 
     router.get('/admin/getCaptcha', controller.login.getCaptcha);
     router.get('/admin/getLoginBg', controller.login.getLoginBg);
@@ -17,4 +17,10 @@ export default (app: Application) => {
     router.get('/user/admin/getadminbykeywords', controller.user.admin.getAdminByKeywords);
     router.post('/user/admin/createnewadmin', controller.user.admin.createNewAdmin);
     router.get('/article/publish/getallusername', controller.article.publish.getAllUsername);
+    // router.all(/\/article\/music\/.*/, middleware.music);
+    router.get(
+        '/article/music/getMusicBykeywords',
+        middleware.music,
+        controller.article.music.getMusicByKeywords
+    );
 };

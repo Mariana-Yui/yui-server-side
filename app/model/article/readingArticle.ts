@@ -10,6 +10,7 @@ export default (app: Application) => {
         abstract: { type: String }, // 书籍摘要
         content: { type: String, required: true },
         comment: [{ type: Schema.Types.ObjectId, ref: 'ReadingComment' }],
+        // 0:草稿 1:审核 2:审核成功 3:审核失败 4:发布
         status: { type: Number, default: 0 },
         is_top: { type: Boolean, default: false },
         enable: { type: Boolean, default: true },

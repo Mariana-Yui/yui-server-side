@@ -13,4 +13,25 @@ export default class PublishService extends Service {
             return utils.json(-1, '查找失败');
         }
     }
+    // public async saveArticle(ctx: Context, article: any, type: string, isDemo: boolean) {
+    //     const { model } = ctx;
+    //     const { title, author, cover, content } = article;
+    //     try {
+    //         //     switch (type) {
+    //         //         case 'read': {
+    //         //         }
+    //         //         case 'music': {
+    //         //         }
+    //         //         case 'film': {
+    //         //         }
+    //         //         case 'broadcast': {
+    //         //         }
+    //         //         default: {
+    //         //         }
+    //         //     }
+    //     } catch (error) {
+    //         console.log(error);
+    //         return utils.json(-1, '保存文章失败, 请重试');
+    //     }
+    // }
 }

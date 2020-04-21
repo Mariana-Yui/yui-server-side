@@ -15,7 +15,9 @@
         "comma-dangle": 0,
         "@typescript-eslint/no-explicit-any": 0,
         "@typescript-eslint/no-unused-vars": 0,
+        "no-unused-vars": 0,
         "array-bracket-spacing": 0,
-        "space-before-function-paren": 0
+        "space-before-function-paren": 0,
+        "@typescript-eslint/no-empty-function": 0
     }
 }

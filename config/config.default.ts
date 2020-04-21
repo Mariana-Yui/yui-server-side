@@ -32,6 +32,11 @@ export default (appInfo: EggAppInfo) => {
             enable: false
         }
     };
+    // alinode
+    config.alinode = {
+        appid: '84503',
+        secret: '9eb7beb3b261a7771158a065745f5de2f1ba6b23'
+    };
     // 背景图片
     const bg = {
         length: 15
