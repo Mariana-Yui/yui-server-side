@@ -10,7 +10,7 @@ export default (app: Application) => {
         abstract: { type: String }, // 书籍摘要
         music_info: {
             name: { type: String, required: true },
-            singer: { type: String },
+            artists: { type: String },
             url: { type: String, required: true },
             cover: { type: String },
             album: { type: String }

@@ -22,4 +22,9 @@ export default (app: Application) => {
         '/article/music/searchMusicBykeywords',
         controller.article.music.searchMusicByKeywords
     );
+    router.get(
+        '/article/music/getMusicByDefaultkeywords',
+        controller.article.music.getMusicByDefaultKeywords
+    );
+    router.get('/article/music/getSpecificSongurls', controller.article.music.getSpecificSongUrls);
 };

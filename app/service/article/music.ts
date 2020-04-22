@@ -71,6 +71,26 @@ export default class MusicService extends Service {
             proxy: query.proxy
         });
     }
+    public async getMusicUrlById(songs: any[], query: any, music_api_base_url: string) {
+        const pendings: Array<Promise<any>> = songs.map((song: any) => {
+            return this.getSongDetail(query, song.id, music_api_base_url);
+        });
+        try {
+            const resolves = await Promise.all(pendings);
+            const songs = resolves.map((res: any) => {
+                /* 将音乐文件url加入json */
+                // return Object.assign({}, res.body.songs[0], {
+                //     songUrl: `https://music.163.com/song/media/outer/url?id=${res.body.songs[0].id}.mp3`
+                // });
+                /* 不返回默认音乐url, 选择特定音乐后再请求，默认url有可能404 */
+                return res.body.songs[0];
+            });
+            return utils.json(0, '搜索成功', songs);
+        } catch (error) {
+            console.log(error);
+            return utils.json(-1, '查询歌曲信息失败');
+        }
+    }
     public async searchMusicByKeywords(ctx: Context, level: number) {
         const { query } = ctx.state;
         const isLogin = await this.checkLoginStatus(query);
@@ -79,14 +99,14 @@ export default class MusicService extends Service {
             if (level < 2) {
                 this.searchMusicByKeywords(ctx, level + 1);
             } else {
-                ctx.body = utils.json(-1, '未知错误');
+                return utils.json(-1, '未知错误');
             }
         } else {
             const { music_api_base_url } = ctx.app.config;
             const data = {
                 s: query.keywords,
                 type: query.type || 1, // 1: 单曲, 10: 专辑, 100: 歌手, 1000: 歌单, 1002: 用户, 1004: MV, 1006: 歌词, 1009: 电台, 1014: 视频
-                limit: query.limit || 30,
+                limit: query.limit || 10,
                 offset: query.offset || 0
             };
             try {
@@ -103,26 +123,70 @@ export default class MusicService extends Service {
                 );
                 // 并行promise
                 ctx.status = answer.status;
-                const pendings: Array<Promise<any>> = answer.body.result.songs.map((song: any) => {
-                    return this.getSongDetail(query, song.id, music_api_base_url);
-                });
-                try {
-                    const resolves = await Promise.all(pendings);
-                    const songs = resolves.map((res: any) => {
-                        // 将音乐文件url加入json
-                        return Object.assign({}, res.body.songs[0], {
-                            songUrl: `https://music.163.com/song/media/outer/url?id=${res.body.songs[0].id}.mp3`
-                        });
-                    });
-                    return utils.json(0, '搜索成功', songs);
-                } catch (error) {
-                    console.log(error);
-                    return utils.json(-1, '查询歌曲信息失败');
-                }
+                return this.getMusicUrlById(answer.body.result.songs, query, music_api_base_url);
             } catch (error) {
                 console.log(error);
                 return utils.json(-1, '搜索失败');
             }
+        }
+    }
+    public async getMusicByDefaultKeywords(ctx: Context) {
+        const { query } = ctx.state;
+        try {
+            const _default = await request(
+                'POST',
+                'http://interface3.music.163.com/eapi/search/defaultkeyword/get',
+                {},
+                {
+                    crypto: 'eapi',
+                    cookie: query.cookie,
+                    proxy: query.proxy,
+                    url: '/api/search/defaultkeyword/get'
+                }
+            );
+            if (_default.status === 200) {
+                query.keywords = _default.body.data.realkeyword as string;
+                return await this.searchMusicByKeywords(ctx, 0);
+            }
+            throw Error('api请求出错');
+        } catch (error) {
+            console.log(error);
+            return utils.json(-1, error.message);
+        }
+    }
+    public async getSpecificSongUrls(ctx: Context) {
+        const { query } = ctx.state;
+        const { music_api_base_url } = ctx.app.config;
+        if (!('MUSIC_U' in query.cookie)) {
+            query.cookie._ntes_nuid = crypto.randomBytes(16).toString('hex');
+        }
+        query.cookie.os = 'pc';
+        const data = {
+            ids: '[' + query.id + ']',
+            br: parseInt(query.br || 999000)
+        };
+        try {
+            const { status, body }: { status: number; body: any } = await request(
+                'POST',
+                `${music_api_base_url}/api/song/enhance/player/url`,
+                data,
+                {
+                    crypto: 'linuxapi',
+                    cookie: query.cookie,
+                    proxy: query.proxy
+                }
+            );
+            if (status === 200) {
+                const spec_urls = body.data
+                    .map((song: any) => song.url)
+                    .filter((v: string) => v)
+                    .concat([`https://music.163.com/song/media/outer/url?id=${query.id}.mp3`]); // 特定的url+默认可能可行的url
+                return utils.json(0, '查询歌曲链接成功', spec_urls);
+            }
+            throw Error('查询歌曲链接失败');
+        } catch (error) {
+            console.log(error);
+            return utils.json(-1, error.message);
         }
     }
 }
