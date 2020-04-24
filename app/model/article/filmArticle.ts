@@ -24,7 +24,7 @@ export default (app: Application) => {
         is_top: { type: Boolean, default: false },
         enable: { type: Boolean, default: true },
         pre_release_time: { type: Date, default: Date.now },
-        update_time: { type: Date, default: Date.now },
+        publish_time: { type: Date, default: Date.now },
         cover_img: { type: String, required: true },
         views: { type: Number, default: 0 },
         likes: { type: Number, default: 0 },
@@ -38,7 +38,7 @@ export default (app: Application) => {
         create_time = moment(create_time).format('YYYY-MM-DD HH:MM:SS');
         return create_time;
     });
-    FilmArticleSchema.path('update_time').get(function (v: Date) {
+    FilmArticleSchema.path('publish_time').get(function (v: Date) {
         return moment(v).format('YYYY-MM-DD HH:MM:SS');
     });
     FilmArticleSchema.path('pre_release_time').get(function (v: Date) {

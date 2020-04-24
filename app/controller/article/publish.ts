@@ -6,10 +6,10 @@ export default class PublishController extends Controller {
         const res = await service.article.publish.getAllUsername(ctx);
         ctx.body = res;
     }
-    // public async saveArticle() {
-    //     const { ctx, service } = this;
-    //     const { article, username, type, demo: isDemo } = ctx.request.body;
-    //     const res = await service.article.publish.saveArticle(ctx, article, type, isDemo);
-    //     ctx.body = res;
-    // }
+    public async saveArticle() {
+        const { ctx, service } = this;
+        const { article, type, isDemo } = ctx.request.body;
+        const res = await service.article.publish.saveArticle(ctx, article, type, isDemo);
+        ctx.body = res;
+    }
 }

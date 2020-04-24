@@ -17,6 +17,7 @@ export default (app: Application) => {
     router.get('/user/admin/getadminbykeywords', controller.user.admin.getAdminByKeywords);
     router.post('/user/admin/createnewadmin', controller.user.admin.createNewAdmin);
     router.get('/article/publish/getallusername', controller.article.publish.getAllUsername);
+    router.post('/article/publish/savearticle', controller.article.publish.saveArticle);
     // router.all(/\/article\/music\/.*/, middleware.music);
     router.get(
         '/article/music/searchMusicBykeywords',
