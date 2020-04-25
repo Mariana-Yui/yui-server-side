@@ -14,7 +14,14 @@ export default class PublishService extends Service {
             return utils.json(-1, '查找失败');
         }
     }
-    public async saveArticle(ctx: Context, article: any, type: string, isDemo: boolean) {
+    // _id为article id
+    public async saveArticle(
+        ctx: Context,
+        article: any,
+        type: string,
+        isDemo: boolean,
+        _id: string
+    ) {
         const {
             ReadingArticle,
             MusicArticle,
@@ -31,7 +38,7 @@ export default class PublishService extends Service {
             abstract,
             music_info,
             film_info,
-            broadcast
+            broadcast: broadcast_url
         } = article;
         const commonPart = {
             title,
@@ -52,29 +59,62 @@ export default class PublishService extends Service {
             // 指定外键要把外键关联表的相应字段填入外键中, 否则找不到的quq
             switch (type) {
                 case 'read': {
-                    savedArticle = await ReadingArticle.create(
-                        Object.assign({ author_info: userId }, commonPart, { abstract })
-                    );
+                    // ''create, 非''update
+                    if (_id === '') {
+                        savedArticle = await ReadingArticle.create(
+                            Object.assign({ author_info: userId }, commonPart, { abstract })
+                        );
+                    } else {
+                        savedArticle = await ReadingArticle.findOneAndUpdate(
+                            { _id },
+                            Object.assign({ author_info: userId }, commonPart, { abstract })
+                        );
+                    }
                     break;
                 }
                 case 'music': {
-                    savedArticle = await MusicArticle.create(
-                        Object.assign({ author_info: userId }, commonPart, { music_info })
-                    );
+                    if (_id === '') {
+                        savedArticle = await MusicArticle.create(
+                            Object.assign({ author_info: userId }, commonPart, { music_info })
+                        );
+                    } else {
+                        savedArticle = await MusicArticle.findOneAndUpdate(
+                            { _id },
+                            Object.assign({ author_info: userId }, commonPart, { music_info })
+                        );
+                    }
                     break;
                 }
                 case 'film': {
-                    savedArticle = await FilmArticle.create(
-                        Object.assign({ author_info: userId }, commonPart, { film_info })
-                    );
+                    if (_id === '') {
+                        savedArticle = await FilmArticle.create(
+                            Object.assign({ author_info: userId }, commonPart, { film_info })
+                        );
+                    } else {
+                        savedArticle = await FilmArticle.findOneAndUpdate(
+                            { _id },
+                            Object.assign({ author_info: userId }, commonPart, { film_info })
+                        );
+                    }
                     break;
                 }
                 case 'broadcast': {
-                    savedArticle = await BroadcastArticle.create(
-                        Object.assign({ author_info: userId }, commonPart, { broadcast })
-                    );
+                    if (_id === '') {
+                        savedArticle = await BroadcastArticle.create(
+                            Object.assign({ author_info: userId }, commonPart, { broadcast_url })
+                        );
+                    } else {
+                        savedArticle = await BroadcastArticle.findOneAndUpdate(
+                            { _id },
+                            Object.assign({ author_info: userId }, commonPart, { broadcast_url })
+                        );
+                    }
                     break;
                 }
+            }
+            console.log(savedArticle);
+            if (!savedArticle) {
+                return utils.json(-1, '文章id不存在, 请勿进行违规操作');
             }
             return utils.json(0, isDemo ? '保存草稿成功!' : '文章已发布, 待审核...', {
                 article_id: savedArticle._id

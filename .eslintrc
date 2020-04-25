@@ -5,7 +5,7 @@
     },
     "rules": {
         "indent": ["error", 4, { "SwitchCase": 1 }],
-        "@typescript-eslint/indent": ["error", 4],
+        "@typescript-eslint/indent": ["error", 4, { "SwitchCase": 1 }],
         "linebreak-style": ["error", "unix"],
         "quotes": ["error", "single"],
         "semi": ["error", "always"],
@@ -20,6 +20,7 @@
         "space-before-function-paren": 0,
         "@typescript-eslint/no-empty-function": 0,
         "one-var-declaration-per-line": 0,
+        "default-case": 0,
         "no-empty": 0
     }
 }

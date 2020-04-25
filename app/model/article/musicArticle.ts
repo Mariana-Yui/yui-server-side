@@ -11,7 +11,7 @@ export default (app: Application) => {
         music_info: {
             name: { type: String, required: true },
             artists: { type: String },
-            url: { type: String, required: true },
+            urls: { type: [{ type: String, required: true }] },
             cover: { type: String },
             album: { type: String }
         },

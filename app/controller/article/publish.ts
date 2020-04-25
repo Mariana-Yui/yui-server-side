@@ -8,8 +8,8 @@ export default class PublishController extends Controller {
     }
     public async saveArticle() {
         const { ctx, service } = this;
-        const { article, type, isDemo } = ctx.request.body;
-        const res = await service.article.publish.saveArticle(ctx, article, type, isDemo);
+        const { article, type, isDemo, _id } = ctx.request.body;
+        const res = await service.article.publish.saveArticle(ctx, article, type, isDemo, _id);
         ctx.body = res;
     }
 }

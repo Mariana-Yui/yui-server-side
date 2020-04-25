@@ -28,4 +28,5 @@ export default (app: Application) => {
         controller.article.music.getMusicByDefaultKeywords
     );
     router.get('/article/music/getSpecificSongurls', controller.article.music.getSpecificSongUrls);
+    router.get('/article/list/getAllTypedArticle', controller.article.list.getAllTypedArticle);
 };
