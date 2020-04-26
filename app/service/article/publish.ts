@@ -1,5 +1,6 @@
 /* eslint-disable default-case */
 import { Service, Context } from 'egg';
+import * as _ from 'lodash';
 import utils from '../../utils';
 
 export default class PublishService extends Service {
@@ -112,7 +113,6 @@ export default class PublishService extends Service {
                     break;
                 }
             }
-            console.log(savedArticle);
             if (!savedArticle) {
                 return utils.json(-1, '文章id不存在, 请勿进行违规操作');
             }
@@ -122,6 +122,57 @@ export default class PublishService extends Service {
         } catch (error) {
             console.log(error);
             return utils.json(-1, '保存文章失败, 请重试');
+        }
+    }
+    public async getArticleInfo(ctx: Context, _id: string, author_id: string, type: string) {
+        try {
+            const {
+                ReadingArticle,
+                MusicArticle,
+                FilmArticle,
+                BroadcastArticle
+            } = (ctx.model as any).Article;
+            const { Admin } = ctx.model;
+            const { username } = ctx.state;
+            const user = await Admin.findOne({ username });
+            if (!(user && (user.role === 'admin' || user._id === author_id))) {
+                return utils.json(-1, '违规操作');
+            }
+            let article;
+            switch (type) {
+                case 'read': {
+                    article = await ReadingArticle.findById(_id);
+                    break;
+                }
+                case 'film': {
+                    article = await FilmArticle.findById(_id);
+                    break;
+                }
+                case 'music': {
+                    article = await MusicArticle.findById(_id);
+                    break;
+                }
+                case 'broadcast': {
+                    article = await BroadcastArticle.findById(_id);
+                }
+            }
+            if (article != null) {
+                article = _.omit(article.toObject(), [
+                    'collects',
+                    'comment',
+                    'likes',
+                    'views',
+                    '__v',
+                    'status',
+                    'pre_release_time',
+                    'is_top',
+                    'enable'
+                ]);
+                return utils.json(0, '获取文章信息成功', article);
+            }
+            throw Error('文章id不存在');
+        } catch (error) {
+            return utils.json(-1, error.message);
         }
     }
 }

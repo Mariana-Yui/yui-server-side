@@ -12,4 +12,10 @@ export default class PublishController extends Controller {
         const res = await service.article.publish.saveArticle(ctx, article, type, isDemo, _id);
         ctx.body = res;
     }
+    public async getArticleInfo() {
+        const { ctx, service } = this;
+        const { _id, author_id, type } = ctx.request.query;
+        const res = await service.article.publish.getArticleInfo(ctx, _id, author_id, type);
+        ctx.body = res;
+    }
 }

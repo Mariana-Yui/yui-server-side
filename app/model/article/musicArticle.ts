@@ -9,6 +9,7 @@ export default (app: Application) => {
         author: { type: String, required: true },
         abstract: { type: String }, // 书籍摘要
         music_info: {
+            id: { type: Number, required: true },
             name: { type: String, required: true },
             artists: { type: String },
             urls: { type: [{ type: String, required: true }] },

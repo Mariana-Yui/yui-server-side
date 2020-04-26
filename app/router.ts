@@ -18,6 +18,7 @@ export default (app: Application) => {
     router.post('/user/admin/createnewadmin', controller.user.admin.createNewAdmin);
     router.get('/article/publish/getallusername', controller.article.publish.getAllUsername);
     router.post('/article/publish/savearticle', controller.article.publish.saveArticle);
+    router.get('/article/publish/getArticleInfo', controller.article.publish.getArticleInfo);
     // router.all(/\/article\/music\/.*/, middleware.music);
     router.get(
         '/article/music/searchMusicBykeywords',
@@ -28,5 +29,11 @@ export default (app: Application) => {
         controller.article.music.getMusicByDefaultKeywords
     );
     router.get('/article/music/getSpecificSongurls', controller.article.music.getSpecificSongUrls);
-    router.get('/article/list/getAllTypedArticle', controller.article.list.getAllTypedArticle);
+    // router.get('/article/list/getAllTypedArticle', controller.article.list.getAllTypedArticle);
+    router.get(
+        '/article/list/searchArticleByKeywords',
+        controller.article.list.searchArticleByKeywords
+    );
+    router.post('/article/list/delTypedArticle', controller.article.list.delTypedArticle);
+    router.post('/article/list/toggleArticleStatus', controller.article.list.toggleArticleStatus);
 };
