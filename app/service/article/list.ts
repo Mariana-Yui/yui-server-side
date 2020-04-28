@@ -58,14 +58,16 @@ export default class ListService extends Service {
         type: string
     ) {
         try {
-            const { Admin } = ctx.model;
+            const { Admin, User } = ctx.model;
             const { ReadingArticle, MusicArticle, FilmArticle, BroadcastArticle } = ctx.model
                 .Article as any;
+            let userDetails;
             try {
                 const admin = await Admin.findOne({ username: ctx.state.username });
                 if (!(admin && (admin.role === 'admin' || admin._id === author_id))) {
                     throw Error('违规操作');
                 }
+                userDetails = await User.findOne({ _id: admin.details });
             } catch (error) {
                 return utils.json(-1, error.message);
             }
@@ -73,18 +75,38 @@ export default class ListService extends Service {
             switch (type) {
                 case 'read': {
                     article = await ReadingArticle.findOneAndDelete({ _id: article_id });
+                    const index = (userDetails.created.read_article as Array<string>).indexOf(
+                        article_id
+                    );
+                    userDetails.created.read_article.splice(index, 1);
+                    await userDetails.save();
                     break;
                 }
                 case 'music': {
                     article = await MusicArticle.findOneAndDelete({ _id: article_id });
+                    const index = (userDetails.created.music_article as Array<string>).indexOf(
+                        article_id
+                    );
+                    userDetails.created.music_article.splice(index, 1);
+                    await userDetails.save();
                     break;
                 }
                 case 'film': {
                     article = await FilmArticle.findOneAndDelete({ _id: article_id });
+                    const index = (userDetails.created.film_article as Array<string>).indexOf(
+                        article_id
+                    );
+                    userDetails.created.film_article.splice(index, 1);
+                    await userDetails.save();
                     break;
                 }
                 case 'broadcast': {
                     article = await BroadcastArticle.findOneAndDelete({ _id: article_id });
+                    const index = (userDetails.created.broadcast_article as Array<string>).indexOf(
+                        article_id
+                    );
+                    userDetails.created.broadcast_article.splice(index, 1);
+                    await userDetails.save();
                 }
             }
             if (article == null) {

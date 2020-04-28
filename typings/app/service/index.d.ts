@@ -14,6 +14,7 @@ import ExportArticleList from '../../../app/service/article/list';
 import ExportArticleMusic from '../../../app/service/article/music';
 import ExportArticlePublish from '../../../app/service/article/publish';
 import ExportUserAdmin from '../../../app/service/user/admin';
+import ExportUserDetail from '../../../app/service/user/detail';
 
 declare module 'egg' {
   interface IService {
@@ -28,6 +29,7 @@ declare module 'egg' {
     }
     user: {
       admin: AutoInstanceType<typeof ExportUserAdmin>;
+      detail: AutoInstanceType<typeof ExportUserDetail>;
     }
   }
 }

@@ -65,11 +65,15 @@ export default class AdminService extends Service {
         }
     }
     public async createNewAdmin(ctx: Context, info: any) {
-        const { Admin } = ctx.model;
+        const { Admin, User } = ctx.model;
         try {
-            let user = await Admin.create(info);
-            user = _.omit(user.toObject(), ['token', 'password', '__v']);
-            return utils.json(0, '添加新用户成功', user);
+            const {
+                location: { last_ip, last_ip_location }
+            } = info;
+            const { _id } = await User.create({ last_ip, last_ip_location });
+            let admin = await Admin.create({ ...info, details: _id });
+            admin = _.omit(admin.toObject(), ['token', 'password', '__v', 'details']);
+            return utils.json(0, '添加新用户成功', admin);
         } catch (error) {
             console.log(error);
             return utils.json(-1, '添加新用户失败, 请刷新重试');

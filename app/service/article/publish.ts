@@ -29,7 +29,7 @@ export default class PublishService extends Service {
             FilmArticle,
             BroadcastArticle
         } = (ctx.model as any).Article;
-        const { Admin } = ctx.model;
+        const { Admin, User } = ctx.model;
         const {
             title,
             author,
@@ -50,10 +50,13 @@ export default class PublishService extends Service {
             status: isDemo ? 0 : 1
         };
         try {
-            let savedArticle, userId;
+            let savedArticle, userId, details;
             try {
                 // 查找用户id作为外键, 也可以前端直接传
-                userId = (await Admin.findOne({ username: author }))._id;
+                const user = (await Admin.findOne({ username: author }));
+                userId = user._id;
+                details = await User.findById(user.details);
+                console.log(details);
             } catch (error) {
                 return utils.json(-1, error.message);
             }
@@ -70,6 +73,8 @@ export default class PublishService extends Service {
                             { _id },
                             Object.assign({ author_info: userId }, commonPart, { abstract })
                         );
+                        (details.created.read_article as Array<any>).push(savedArticle._id);
+                        await details.save();
                     }
                     break;
                 }
@@ -83,6 +88,8 @@ export default class PublishService extends Service {
                             { _id },
                             Object.assign({ author_info: userId }, commonPart, { music_info })
                         );
+                        (details.created.music_article as Array<any>).push(savedArticle._id);
+                        await details.save();
                     }
                     break;
                 }
@@ -96,6 +103,8 @@ export default class PublishService extends Service {
                             { _id },
                             Object.assign({ author_info: userId }, commonPart, { film_info })
                         );
+                        (details.created.film_article as Array<any>).push(savedArticle._id);
+                        await details.save();
                     }
                     break;
                 }
@@ -109,6 +118,8 @@ export default class PublishService extends Service {
                             { _id },
                             Object.assign({ author_info: userId }, commonPart, { broadcast_url })
                         );
+                        (details.created.broadcast_article as Array<any>).push(savedArticle._id);
+                        await details.save();
                     }
                     break;
                 }

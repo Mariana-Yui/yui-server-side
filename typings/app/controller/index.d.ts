@@ -10,6 +10,7 @@ import ExportArticleList from '../../../app/controller/article/list';
 import ExportArticleMusic from '../../../app/controller/article/music';
 import ExportArticlePublish from '../../../app/controller/article/publish';
 import ExportUserAdmin from '../../../app/controller/user/admin';
+import ExportUserDetail from '../../../app/controller/user/detail';
 
 declare module 'egg' {
   interface IController {
@@ -24,6 +25,7 @@ declare module 'egg' {
     }
     user: {
       admin: ExportUserAdmin;
+      detail: ExportUserDetail;
     }
   }
 }

@@ -14,7 +14,7 @@ export default (app: Application) => {
         role: { type: String, enum: ['admin', 'author'], default: 'admin' },
         role_name: { type: String, enum: ['管理员', '用户'], default: '管理员' },
         enable: { type: Boolean, default: true },
-        more_info: { type: Schema.Types.ObjectId, ref: 'User' }
+        details: { type: Schema.Types.ObjectId, ref: 'User' }
     });
 
     AdminSchema.virtual('create_time').get(function () {

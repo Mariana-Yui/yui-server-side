@@ -3,7 +3,7 @@ import { Application } from 'egg';
 export default (app: Application) => {
     const { Schema, model } = app.mongoose;
     const UserSchema = new Schema({
-        user_id: { type: Schema.Types.ObjectId, ref: 'Admin' },
+        // user_id: { type: Schema.Types.ObjectId, ref: 'Admin' },
         // 上次登录信息
         last_ip: { type: String },
         last_ip_location: { type: String },
@@ -11,17 +11,17 @@ export default (app: Application) => {
         agent: { type: String },
         // 创作
         created: {
-            read_article: { type: Schema.Types.ObjectId, ref: 'ReadingArticle' },
-            film_article: { type: Schema.Types.ObjectId, ref: 'FilmArticle' },
-            music_article: { type: Schema.Types.ObjectId, ref: 'MusicArticle' },
-            broadcast_article: { type: Schema.Types.ObjectId, ref: 'BroadcastArticle' }
+            read_article: [{ type: Schema.Types.ObjectId, ref: 'ReadingArticle' }],
+            film_article: [{ type: Schema.Types.ObjectId, ref: 'FilmArticle' }],
+            music_article: [{ type: Schema.Types.ObjectId, ref: 'MusicArticle' }],
+            broadcast_article: [{ type: Schema.Types.ObjectId, ref: 'BroadcastArticle' }]
         },
         // 收藏, 不要命名collection
         collected: {
-            read_article: { type: Schema.Types.ObjectId, ref: 'ReadingArticle' },
-            film_article: { type: Schema.Types.ObjectId, ref: 'FilmArticle' },
-            music_article: { type: Schema.Types.ObjectId, ref: 'MusicArticle' },
-            broadcast_article: { type: Schema.Types.ObjectId, ref: 'BroadcastArticle' }
+            read_article: [{ type: Schema.Types.ObjectId, ref: 'ReadingArticle' }],
+            film_article: [{ type: Schema.Types.ObjectId, ref: 'FilmArticle' }],
+            music_article: [{ type: Schema.Types.ObjectId, ref: 'MusicArticle' }],
+            broadcast_article: [{ type: Schema.Types.ObjectId, ref: 'BroadcastArticle' }]
         },
         following: [{ type: Schema.Types.ObjectId, ref: 'Admin' }],
         followers: [{ type: Schema.Types.ObjectId, ref: 'Admin' }]
