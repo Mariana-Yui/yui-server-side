@@ -31,4 +31,10 @@ export default class ListController extends Controller {
         const res = await service.article.list.searchArticleByKeywords(ctx, _id, keywords, type);
         ctx.body = res;
     }
+    public async changeAuditStutus() {
+        const { ctx, service } = this;
+        const { _id, status, type } = ctx.request.body;
+        const res = await service.article.list.changeAuditStutus(ctx, _id, status, type);
+        ctx.body = res;
+    }
 }

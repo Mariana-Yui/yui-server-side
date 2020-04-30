@@ -53,7 +53,7 @@ export default class PublishService extends Service {
             let savedArticle, userId, details;
             try {
                 // 查找用户id作为外键, 也可以前端直接传
-                const user = (await Admin.findOne({ username: author }));
+                const user = await Admin.findOne({ username: author });
                 userId = user._id;
                 details = await User.findById(user.details);
                 console.log(details);
@@ -71,7 +71,10 @@ export default class PublishService extends Service {
                     } else {
                         savedArticle = await ReadingArticle.findOneAndUpdate(
                             { _id },
-                            Object.assign({ author_info: userId }, commonPart, { abstract })
+                            Object.assign({ author_info: userId }, commonPart, {
+                                abstract,
+                                pre_release_time: Date.now()
+                            })
                         );
                         (details.created.read_article as Array<any>).push(savedArticle._id);
                         await details.save();
@@ -86,7 +89,10 @@ export default class PublishService extends Service {
                     } else {
                         savedArticle = await MusicArticle.findOneAndUpdate(
                             { _id },
-                            Object.assign({ author_info: userId }, commonPart, { music_info })
+                            Object.assign({ author_info: userId }, commonPart, {
+                                music_info,
+                                pre_release_time: Date.now()
+                            })
                         );
                         (details.created.music_article as Array<any>).push(savedArticle._id);
                         await details.save();
@@ -101,7 +107,10 @@ export default class PublishService extends Service {
                     } else {
                         savedArticle = await FilmArticle.findOneAndUpdate(
                             { _id },
-                            Object.assign({ author_info: userId }, commonPart, { film_info })
+                            Object.assign({ author_info: userId }, commonPart, {
+                                film_info,
+                                pre_release_time: Date.now()
+                            })
                         );
                         (details.created.film_article as Array<any>).push(savedArticle._id);
                         await details.save();

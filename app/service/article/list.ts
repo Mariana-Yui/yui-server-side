@@ -184,4 +184,34 @@ export default class ListService extends Service {
             return utils.json(-1, error.message);
         }
     }
+    public async changeAuditStutus(ctx: Context, _id: string, status: number, type: string) {
+        const { ReadingArticle, MusicArticle, FilmArticle, BroadcastArticle } = ctx.model
+            .Article as any;
+        try {
+            let article;
+            switch (type) {
+                case 'read': {
+                    article = await ReadingArticle.findOneAndUpdate({ _id }, { status });
+                    break;
+                }
+                case 'music': {
+                    article = await MusicArticle.findOneAndUpdate({ _id }, { status });
+                    break;
+                }
+                case 'film': {
+                    article = await FilmArticle.findOneAndUpdate({ _id }, { status });
+                    break;
+                }
+                case 'broadcast': {
+                    article = await BroadcastArticle.findOneAndUpdate({ _id }, { status });
+                }
+            }
+            if (article != null) {
+                return utils.json(0, '修改成功');
+            }
+            throw Error('修改失败');
+        } catch (error) {
+            return utils.json(-1, error.message);
+        }
+    }
 }
