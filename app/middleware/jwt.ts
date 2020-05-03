@@ -4,7 +4,7 @@ import { Context } from 'egg';
 export default function Authentication(option: any) {
     option = option || {};
     return async (ctx: Context, next: () => Promise<any>) => {
-        if (!ctx.url.match(/getLoginBg|getCaptcha/)) {
+        if (!ctx.url.match(/getLoginBg|getCaptcha/) && ctx.query.noauth == null) {
             const { request } = ctx;
             const { config } = ctx.app;
             const auth = request.get('Authorization');

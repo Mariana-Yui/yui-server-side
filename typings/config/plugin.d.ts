@@ -17,6 +17,7 @@ import 'egg-view';
 import 'egg-cors';
 import 'egg-mongoose';
 import 'egg-alinode';
+import 'egg-redis';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
   interface EggPlugin {
@@ -35,5 +36,6 @@ declare module 'egg' {
     cors?: EggPluginItem;
     mongoose?: EggPluginItem;
     alinode?: EggPluginItem;
+    redis?: EggPluginItem;
   }
 }

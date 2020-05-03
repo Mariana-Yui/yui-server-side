@@ -11,6 +11,14 @@ export default () => {
             useUnifiedTopology: true
         }
     };
+    config.redis = {
+        client: {
+            port: 6379, // Redis port
+            host: '127.0.0.1', // Redis host
+            password: '199847',
+            db: 0
+        }
+    };
     // 默认admin头像
     config.avatar = 'http://q95bvp3v9.bkt.clouddn.com/2020/04/22/c83ef44d49e5680*80.jpg';
     // 默认个性签名

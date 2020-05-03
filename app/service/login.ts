@@ -47,7 +47,7 @@ export default class LoginService extends Service {
                 if (admin) {
                     if (password === admin.password) {
                         const token = jwt.sign({ username }, ctx.app.config.jwt_key, {
-                            expiresIn: '1h'
+                            expiresIn: ctx.app.config.expired
                         });
                         // 存储token, new要设为true才会返回新的数据, 否则默认返回旧数据
                         let updatedAdmin = await Admin.findOneAndUpdate(

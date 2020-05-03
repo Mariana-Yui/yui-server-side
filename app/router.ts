@@ -41,4 +41,8 @@ export default (app: Application) => {
     router.post('/article/list/delTypedArticle', controller.article.list.delTypedArticle);
     router.post('/article/list/toggleArticleStatus', controller.article.list.toggleArticleStatus);
     router.post('/article/list/changeAuditStutus', controller.article.list.changeAuditStutus);
+
+    /* app */
+    router.post('/app/me/loginStatus', controller.login.testToken);
+    router.get('/app/all/getBannerInfo', controller.all.banner.getBannerInfo);
 };

@@ -12,6 +12,10 @@ const plugin: EggPlugin = {
     alinode: {
         enable: true,
         package: 'egg-alinode'
+    },
+    redis: {
+        enable: true,
+        package: 'egg-redis'
     }
 };
 
