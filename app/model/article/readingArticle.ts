@@ -21,19 +21,19 @@ export default (app: Application) => {
         likes: { type: Number, default: 0 },
         collects: { type: Number, default: 0 }
     });
-
+    // 格式是YYYY:MM:DD HH:mm:ss 啊啊啊啊啊啊啊啊啊啊
     ReadingArticleSchema.virtual('create_time').get(function () {
         let create_time: Date | string = new Date(
             parseInt(String(this._id).substring(0, 8), 16) * 1000
         );
-        create_time = moment(create_time).format('YYYY-MM-DD HH:MM:SS');
+        create_time = moment(create_time).format('YYYY-MM-DD HH:mm:ss');
         return create_time;
     });
     ReadingArticleSchema.path('publish_time').get(function (v: Date) {
-        return moment(v).format('YYYY-MM-DD HH:MM:SS');
+        return moment(v).format('YYYY-MM-DD HH:mm:ss');
     });
     ReadingArticleSchema.path('pre_release_time').get(function (v: Date) {
-        return moment(v).format('YYYY-MM-DD HH:MM:SS');
+        return moment(v).format('YYYY-MM-DD HH:mm:ss');
     });
     ReadingArticleSchema.set('toObject', { getters: true, virtuals: true });
 

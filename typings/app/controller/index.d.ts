@@ -7,11 +7,13 @@ import ExportPermission from '../../../app/controller/permission';
 import ExportProfile from '../../../app/controller/profile';
 import ExportQiniu from '../../../app/controller/qiniu';
 import ExportAllBanner from '../../../app/controller/all/banner';
+import ExportAllTopview from '../../../app/controller/all/topview';
 import ExportArticleList from '../../../app/controller/article/list';
 import ExportArticleMusic from '../../../app/controller/article/music';
 import ExportArticlePublish from '../../../app/controller/article/publish';
 import ExportUserAdmin from '../../../app/controller/user/admin';
 import ExportUserDetail from '../../../app/controller/user/detail';
+import ExportYuiArticle from '../../../app/controller/yui/article';
 
 declare module 'egg' {
   interface IController {
@@ -21,6 +23,7 @@ declare module 'egg' {
     qiniu: ExportQiniu;
     all: {
       banner: ExportAllBanner;
+      topview: ExportAllTopview;
     }
     article: {
       list: ExportArticleList;
@@ -30,6 +33,9 @@ declare module 'egg' {
     user: {
       admin: ExportUserAdmin;
       detail: ExportUserDetail;
+    }
+    yui: {
+      article: ExportYuiArticle;
     }
   }
 }

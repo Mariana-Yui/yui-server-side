@@ -34,7 +34,7 @@ export default class PublishService extends Service {
             title,
             author,
             cover: cover_img,
-            publishDate: update_time,
+            publishDate: publish_time,
             content,
             abstract,
             music_info,
@@ -46,7 +46,7 @@ export default class PublishService extends Service {
             author,
             cover_img,
             content,
-            update_time,
+            publish_time: new Date(publish_time),
             status: isDemo ? 0 : 1
         };
         try {
@@ -56,7 +56,6 @@ export default class PublishService extends Service {
                 const user = await Admin.findOne({ username: author });
                 userId = user._id;
                 details = await User.findById(user.details);
-                console.log(details);
             } catch (error) {
                 return utils.json(-1, error.message);
             }
@@ -73,12 +72,13 @@ export default class PublishService extends Service {
                             { _id },
                             Object.assign({ author_info: userId }, commonPart, {
                                 abstract,
-                                pre_release_time: Date.now()
-                            })
+                                pre_release_time: new Date()
+                            }),
+                            { new: true }
                         );
-                        (details.created.read_article as Array<any>).push(savedArticle._id);
-                        await details.save();
                     }
+                    (details.created.read_article as Array<any>).push(savedArticle._id);
+                    await details.save();
                     break;
                 }
                 case 'music': {
@@ -92,11 +92,12 @@ export default class PublishService extends Service {
                             Object.assign({ author_info: userId }, commonPart, {
                                 music_info,
                                 pre_release_time: Date.now()
-                            })
+                            }),
+                            { new: true }
                         );
-                        (details.created.music_article as Array<any>).push(savedArticle._id);
-                        await details.save();
                     }
+                    (details.created.music_article as Array<any>).push(savedArticle._id);
+                    await details.save();
                     break;
                 }
                 case 'film': {
@@ -110,11 +111,12 @@ export default class PublishService extends Service {
                             Object.assign({ author_info: userId }, commonPart, {
                                 film_info,
                                 pre_release_time: Date.now()
-                            })
+                            }),
+                            { new: true }
                         );
-                        (details.created.film_article as Array<any>).push(savedArticle._id);
-                        await details.save();
                     }
+                    (details.created.film_article as Array<any>).push(savedArticle._id);
+                    await details.save();
                     break;
                 }
                 case 'broadcast': {
@@ -125,14 +127,16 @@ export default class PublishService extends Service {
                     } else {
                         savedArticle = await BroadcastArticle.findOneAndUpdate(
                             { _id },
-                            Object.assign({ author_info: userId }, commonPart, { broadcast_url })
+                            Object.assign({ author_info: userId }, commonPart, { broadcast_url }),
+                            { new: true }
                         );
-                        (details.created.broadcast_article as Array<any>).push(savedArticle._id);
-                        await details.save();
                     }
+                    (details.created.broadcast_article as Array<any>).push(savedArticle._id);
+                    await details.save();
                     break;
                 }
             }
+            // console.log(savedArticle);
             if (!savedArticle) {
                 return utils.json(-1, '文章id不存在, 请勿进行违规操作');
             }
@@ -177,17 +181,18 @@ export default class PublishService extends Service {
                 }
             }
             if (article != null) {
-                article = _.omit(article.toObject(), [
-                    'collects',
-                    'comment',
-                    'likes',
-                    'views',
-                    '__v',
-                    'status',
-                    'pre_release_time',
-                    'is_top',
-                    'enable'
-                ]);
+                // article = _.omit(article.toObject(), [
+                //     'collects',
+                //     'comment',
+                //     'likes',
+                //     'views',
+                //     '__v',
+                //     'status',
+                //     'pre_release_time',
+                //     'is_top',
+                //     'enable'
+                // ]);
+                console.log(article.publish_time);
                 return utils.json(0, '获取文章信息成功', article);
             }
             throw Error('文章id不存在');

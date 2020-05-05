@@ -45,4 +45,6 @@ export default (app: Application) => {
     /* app */
     router.post('/app/me/loginStatus', controller.login.testToken);
     router.get('/app/all/getBannerInfo', controller.all.banner.getBannerInfo);
+    router.get('/app/all/getTopViewArticles', controller.all.topview.getTopViewArticles);
+    router.post('/app/yui/getArticleRegular', controller.yui.article.getArticleRegular);
 };
