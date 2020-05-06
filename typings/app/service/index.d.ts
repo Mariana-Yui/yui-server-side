@@ -17,7 +17,7 @@ import ExportArticleMusic from '../../../app/service/article/music';
 import ExportArticlePublish from '../../../app/service/article/publish';
 import ExportUserAdmin from '../../../app/service/user/admin';
 import ExportUserDetail from '../../../app/service/user/detail';
-import ExportYuiArticle from '../../../app/service/yui/article';
+import ExportYuiRecommend from '../../../app/service/yui/recommend';
 
 declare module 'egg' {
   interface IService {
@@ -39,7 +39,7 @@ declare module 'egg' {
       detail: AutoInstanceType<typeof ExportUserDetail>;
     }
     yui: {
-      article: AutoInstanceType<typeof ExportYuiArticle>;
+      recommend: AutoInstanceType<typeof ExportYuiRecommend>;
     }
   }
 }

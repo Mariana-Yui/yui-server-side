@@ -67,6 +67,8 @@ export default class PublishService extends Service {
                         savedArticle = await ReadingArticle.create(
                             Object.assign({ author_info: userId }, commonPart, { abstract })
                         );
+                        (details.created.read_article as Array<any>).push(savedArticle._id);
+                        await details.save();
                     } else {
                         savedArticle = await ReadingArticle.findOneAndUpdate(
                             { _id },
@@ -77,8 +79,6 @@ export default class PublishService extends Service {
                             { new: true }
                         );
                     }
-                    (details.created.read_article as Array<any>).push(savedArticle._id);
-                    await details.save();
                     break;
                 }
                 case 'music': {
@@ -86,6 +86,8 @@ export default class PublishService extends Service {
                         savedArticle = await MusicArticle.create(
                             Object.assign({ author_info: userId }, commonPart, { music_info })
                         );
+                        (details.created.music_article as Array<any>).push(savedArticle._id);
+                        await details.save();
                     } else {
                         savedArticle = await MusicArticle.findOneAndUpdate(
                             { _id },
@@ -96,8 +98,6 @@ export default class PublishService extends Service {
                             { new: true }
                         );
                     }
-                    (details.created.music_article as Array<any>).push(savedArticle._id);
-                    await details.save();
                     break;
                 }
                 case 'film': {
@@ -105,6 +105,8 @@ export default class PublishService extends Service {
                         savedArticle = await FilmArticle.create(
                             Object.assign({ author_info: userId }, commonPart, { film_info })
                         );
+                        (details.created.film_article as Array<any>).push(savedArticle._id);
+                        await details.save();
                     } else {
                         savedArticle = await FilmArticle.findOneAndUpdate(
                             { _id },
@@ -115,8 +117,6 @@ export default class PublishService extends Service {
                             { new: true }
                         );
                     }
-                    (details.created.film_article as Array<any>).push(savedArticle._id);
-                    await details.save();
                     break;
                 }
                 case 'broadcast': {
@@ -124,6 +124,8 @@ export default class PublishService extends Service {
                         savedArticle = await BroadcastArticle.create(
                             Object.assign({ author_info: userId }, commonPart, { broadcast_url })
                         );
+                        (details.created.broadcast_article as Array<any>).push(savedArticle._id);
+                        await details.save();
                     } else {
                         savedArticle = await BroadcastArticle.findOneAndUpdate(
                             { _id },
@@ -131,8 +133,6 @@ export default class PublishService extends Service {
                             { new: true }
                         );
                     }
-                    (details.created.broadcast_article as Array<any>).push(savedArticle._id);
-                    await details.save();
                     break;
                 }
             }

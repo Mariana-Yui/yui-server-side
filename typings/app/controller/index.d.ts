@@ -13,7 +13,7 @@ import ExportArticleMusic from '../../../app/controller/article/music';
 import ExportArticlePublish from '../../../app/controller/article/publish';
 import ExportUserAdmin from '../../../app/controller/user/admin';
 import ExportUserDetail from '../../../app/controller/user/detail';
-import ExportYuiArticle from '../../../app/controller/yui/article';
+import ExportYuiRecommend from '../../../app/controller/yui/recommend';
 
 declare module 'egg' {
   interface IController {
@@ -35,7 +35,7 @@ declare module 'egg' {
       detail: ExportUserDetail;
     }
     yui: {
-      article: ExportYuiArticle;
+      recommend: ExportYuiRecommend;
     }
   }
 }

@@ -35,14 +35,14 @@ export default (app: Application) => {
         let create_time: Date | string = new Date(
             parseInt(String(this._id).substring(0, 8), 16) * 1000
         );
-        create_time = moment(create_time).format('YYYY-MM-DD HH:MM:SS');
+        create_time = moment(create_time).format('YYYY-MM-DD HH:mm:ss');
         return create_time;
     });
     FilmArticleSchema.path('publish_time').get(function (v: Date) {
-        return moment(v).format('YYYY-MM-DD HH:MM:SS');
+        return moment(v).format('YYYY-MM-DD HH:mm:ss');
     });
     FilmArticleSchema.path('pre_release_time').get(function (v: Date) {
-        return moment(v).format('YYYY-MM-DD HH:MM:SS');
+        return moment(v).format('YYYY-MM-DD HH:mm:ss');
     });
     FilmArticleSchema.set('toObject', { getters: true, virtuals: true });
 
