@@ -11,6 +11,9 @@ import ExportAllTopview from '../../../app/controller/all/topview';
 import ExportArticleList from '../../../app/controller/article/list';
 import ExportArticleMusic from '../../../app/controller/article/music';
 import ExportArticlePublish from '../../../app/controller/article/publish';
+import ExportMeCollection from '../../../app/controller/me/collection';
+import ExportMeLogin from '../../../app/controller/me/login';
+import ExportMeSpace from '../../../app/controller/me/space';
 import ExportUserAdmin from '../../../app/controller/user/admin';
 import ExportUserDetail from '../../../app/controller/user/detail';
 import ExportYuiRecommend from '../../../app/controller/yui/recommend';
@@ -29,6 +32,11 @@ declare module 'egg' {
       list: ExportArticleList;
       music: ExportArticleMusic;
       publish: ExportArticlePublish;
+    }
+    me: {
+      collection: ExportMeCollection;
+      login: ExportMeLogin;
+      space: ExportMeSpace;
     }
     user: {
       admin: ExportUserAdmin;

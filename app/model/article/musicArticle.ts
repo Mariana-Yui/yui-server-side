@@ -25,8 +25,8 @@ export default (app: Application) => {
         publish_time: { type: Date, default: Date.now },
         cover_img: { type: String, required: true },
         views: { type: Number, default: 0 },
-        likes: { type: Number, default: 0 },
-        collects: { type: Number, default: 0 }
+        likes: { type: [{ type: Schema.Types.ObjectId, ref: 'Admin' }] },
+        collects: { type: [{ type: Schema.Types.ObjectId, ref: 'Admin' }] }
     });
 
     MusicArticleSchema.virtual('create_time').get(function () {

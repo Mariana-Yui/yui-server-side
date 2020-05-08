@@ -15,6 +15,9 @@ import ExportAllTopview from '../../../app/service/all/topview';
 import ExportArticleList from '../../../app/service/article/list';
 import ExportArticleMusic from '../../../app/service/article/music';
 import ExportArticlePublish from '../../../app/service/article/publish';
+import ExportMeCollection from '../../../app/service/me/collection';
+import ExportMeLogin from '../../../app/service/me/login';
+import ExportMeSpace from '../../../app/service/me/space';
 import ExportUserAdmin from '../../../app/service/user/admin';
 import ExportUserDetail from '../../../app/service/user/detail';
 import ExportYuiRecommend from '../../../app/service/yui/recommend';
@@ -33,6 +36,11 @@ declare module 'egg' {
       list: AutoInstanceType<typeof ExportArticleList>;
       music: AutoInstanceType<typeof ExportArticleMusic>;
       publish: AutoInstanceType<typeof ExportArticlePublish>;
+    }
+    me: {
+      collection: AutoInstanceType<typeof ExportMeCollection>;
+      login: AutoInstanceType<typeof ExportMeLogin>;
+      space: AutoInstanceType<typeof ExportMeSpace>;
     }
     user: {
       admin: AutoInstanceType<typeof ExportUserAdmin>;

@@ -8,8 +8,8 @@ export default (app: Application) => {
     router.post('/admin/login', controller.login.testToken);
     router.get('/profile/checkUsername', controller.profile.checkUserExist);
     router.post('/profile/updateProfile', controller.profile.updateProfile);
-    router.post('/profile/checkPassword', controller.profile.checkPassword);
-    router.post('/profile/updatePassword', controller.profile.updatePassword);
+    router.post('/profile/c heckPassword', controller.profile.checkPassword);
+    router.post('/profile/updatePas sword', controller.profile.updatePassword);
     router.get('/qiniu/getUpToken', controller.qiniu.getUpToken);
     router.get('/user/admin/getlist', controller.user.admin.getAdminList);
     router.get('/user/admin/gettotal', controller.user.admin.getTotalNumber);
@@ -43,9 +43,20 @@ export default (app: Application) => {
     router.post('/article/list/changeAuditStutus', controller.article.list.changeAuditStutus);
 
     /* app */
-    router.post('/app/me/loginStatus', controller.login.testToken);
     router.get('/app/all/getBannerInfo', controller.all.banner.getBannerInfo);
     router.get('/app/all/getTopViewArticles', controller.all.topview.getTopViewArticles);
     router.post('/app/yui/getArticleRegular', controller.yui.recommend.getArticleRegular);
     router.post('/app/yui/getLatestArticle', controller.yui.recommend.getLatestArticle);
+    router.post('/app/me/login', controller.me.login.testToken);
+    router.post('/app/space/getUserDetails', controller.me.space.getUserDetails);
+    router.get('/app/space/checkSubscribe', controller.me.space.checkSubscribe);
+    router.post(
+        '/app/collection/getTypedArticleCollection',
+        controller.me.collection.getTypedArticleCollection
+    );
+    router.post('/app/collection/collectArticle', controller.me.collection.collectArticleOrNot);
+    router.post(
+        '/app/collection/removeCollectArticle',
+        controller.me.collection.collectArticleOrNot
+    );
 };

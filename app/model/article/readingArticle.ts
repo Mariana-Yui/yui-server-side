@@ -18,8 +18,8 @@ export default (app: Application) => {
         publish_time: { type: Date, default: Date.now },
         cover_img: { type: String, required: true },
         views: { type: Number, default: 0 },
-        likes: { type: Number, default: 0 },
-        collects: { type: Number, default: 0 }
+        likes: { type: [{ type: Schema.Types.ObjectId, ref: 'Admin' }] },
+        collects: { type: [{ type: Schema.Types.ObjectId, ref: 'Admin' }] }
     });
     // 格式是YYYY:MM:DD HH:mm:ss 啊啊啊啊啊啊啊啊啊啊
     ReadingArticleSchema.virtual('create_time').get(function () {

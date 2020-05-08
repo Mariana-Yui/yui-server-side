@@ -10,6 +10,7 @@ export default (app: Application) => {
         email: { type: String },
         phone: { type: String },
         avatar: { type: String, default: app.config.avatar },
+        background: { type: String, default: app.config.background },
         description: { type: String, default: app.config.description },
         role: { type: String, enum: ['admin', 'author'], default: 'admin' },
         role_name: { type: String, enum: ['管理员', '用户'], default: '管理员' },
