@@ -59,4 +59,6 @@ export default (app: Application) => {
         '/app/collection/removeCollectArticle',
         controller.me.collection.collectArticleOrNot
     );
+    router.post('/app/me/profile/getUserInfo', controller.me.profile.getUserProfile);
+    router.post('/app/me/profile/updateUserInfo', controller.profile.updateProfile);
 };

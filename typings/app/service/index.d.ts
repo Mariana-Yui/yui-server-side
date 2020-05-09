@@ -17,6 +17,7 @@ import ExportArticleMusic from '../../../app/service/article/music';
 import ExportArticlePublish from '../../../app/service/article/publish';
 import ExportMeCollection from '../../../app/service/me/collection';
 import ExportMeLogin from '../../../app/service/me/login';
+import ExportMeProfile from '../../../app/service/me/profile';
 import ExportMeSpace from '../../../app/service/me/space';
 import ExportUserAdmin from '../../../app/service/user/admin';
 import ExportUserDetail from '../../../app/service/user/detail';
@@ -40,6 +41,7 @@ declare module 'egg' {
     me: {
       collection: AutoInstanceType<typeof ExportMeCollection>;
       login: AutoInstanceType<typeof ExportMeLogin>;
+      profile: AutoInstanceType<typeof ExportMeProfile>;
       space: AutoInstanceType<typeof ExportMeSpace>;
     }
     user: {
