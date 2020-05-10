@@ -12,7 +12,9 @@ import ExportArticleList from '../../../app/controller/article/list';
 import ExportArticleMusic from '../../../app/controller/article/music';
 import ExportArticlePublish from '../../../app/controller/article/publish';
 import ExportMeCollection from '../../../app/controller/me/collection';
+import ExportMeLike from '../../../app/controller/me/like';
 import ExportMeLogin from '../../../app/controller/me/login';
+import ExportMeMusic from '../../../app/controller/me/music';
 import ExportMeProfile from '../../../app/controller/me/profile';
 import ExportMeSpace from '../../../app/controller/me/space';
 import ExportUserAdmin from '../../../app/controller/user/admin';
@@ -36,7 +38,9 @@ declare module 'egg' {
     }
     me: {
       collection: ExportMeCollection;
+      like: ExportMeLike;
       login: ExportMeLogin;
+      music: ExportMeMusic;
       profile: ExportMeProfile;
       space: ExportMeSpace;
     }

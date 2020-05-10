@@ -189,4 +189,12 @@ export default class MusicService extends Service {
             return utils.json(-1, error.message);
         }
     }
+    public async getNetEaseVIP(ctx: Context) {
+        const { query } = ctx.state;
+        const isLogin = await this.checkLoginStatus(query);
+        if (!isLogin) {
+            await this.loginByPhone(query);
+        }
+        ctx.status = 204;
+    }
 }

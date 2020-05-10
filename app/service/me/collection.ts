@@ -78,7 +78,7 @@ export default class CollectionService extends Service {
                     await article.save();
                 }
             }
-            return utils.json(0, 'collection operate succussfully', {
+            return utils.json(0, 'collection operation succussfully', {
                 _id: user._id,
                 article_id: article._id
             });

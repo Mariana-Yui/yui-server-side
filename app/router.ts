@@ -43,6 +43,7 @@ export default (app: Application) => {
     router.post('/article/list/changeAuditStutus', controller.article.list.changeAuditStutus);
 
     /* app */
+    router.get('/app/me/music/getNetEaseVIPCookie', controller.me.music.getNetEaseVIPCookie);
     router.get('/app/all/getBannerInfo', controller.all.banner.getBannerInfo);
     router.get('/app/all/getTopViewArticles', controller.all.topview.getTopViewArticles);
     router.post('/app/yui/getArticleRegular', controller.yui.recommend.getArticleRegular);
@@ -61,4 +62,8 @@ export default (app: Application) => {
     );
     router.post('/app/me/profile/getUserInfo', controller.me.profile.getUserProfile);
     router.post('/app/me/profile/updateUserInfo', controller.profile.updateProfile);
+    router.post('/app/me/profile/checkPassword', controller.profile.checkPassword);
+    router.post('/app/me/profile/updatePassword', controller.profile.updatePassword);
+    router.post('/app/me/likeArticle', controller.me.like.likeArticleOrNot);
+    router.post('/app/me/removeLikeArticle', controller.me.like.likeArticleOrNot);
 };

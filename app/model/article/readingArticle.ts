@@ -29,6 +29,9 @@ export default (app: Application) => {
         create_time = moment(create_time).format('YYYY-MM-DD HH:mm:ss');
         return create_time;
     });
+    ReadingArticleSchema.virtual('type').get(function () {
+        return 'read';
+    });
     ReadingArticleSchema.path('publish_time').get(function (v: Date) {
         return moment(v).format('YYYY-MM-DD HH:mm:ss');
     });
