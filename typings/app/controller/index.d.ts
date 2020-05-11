@@ -16,6 +16,8 @@ import ExportMeLike from '../../../app/controller/me/like';
 import ExportMeLogin from '../../../app/controller/me/login';
 import ExportMeMusic from '../../../app/controller/me/music';
 import ExportMeProfile from '../../../app/controller/me/profile';
+import ExportMeRegister from '../../../app/controller/me/register';
+import ExportMeSearch from '../../../app/controller/me/search';
 import ExportMeSpace from '../../../app/controller/me/space';
 import ExportUserAdmin from '../../../app/controller/user/admin';
 import ExportUserDetail from '../../../app/controller/user/detail';
@@ -42,6 +44,8 @@ declare module 'egg' {
       login: ExportMeLogin;
       music: ExportMeMusic;
       profile: ExportMeProfile;
+      register: ExportMeRegister;
+      search: ExportMeSearch;
       space: ExportMeSpace;
     }
     user: {

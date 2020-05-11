@@ -20,6 +20,8 @@ import ExportMeLike from '../../../app/service/me/like';
 import ExportMeLogin from '../../../app/service/me/login';
 import ExportMeMusic from '../../../app/service/me/music';
 import ExportMeProfile from '../../../app/service/me/profile';
+import ExportMeRegister from '../../../app/service/me/register';
+import ExportMeSearch from '../../../app/service/me/search';
 import ExportMeSpace from '../../../app/service/me/space';
 import ExportUserAdmin from '../../../app/service/user/admin';
 import ExportUserDetail from '../../../app/service/user/detail';
@@ -46,6 +48,8 @@ declare module 'egg' {
       login: AutoInstanceType<typeof ExportMeLogin>;
       music: AutoInstanceType<typeof ExportMeMusic>;
       profile: AutoInstanceType<typeof ExportMeProfile>;
+      register: AutoInstanceType<typeof ExportMeRegister>;
+      search: AutoInstanceType<typeof ExportMeSearch>;
       space: AutoInstanceType<typeof ExportMeSpace>;
     }
     user: {

@@ -10,4 +10,10 @@ export default class MusicController extends Controller {
         });
         await service.me.music.getNetEaseVIPCookie(ctx);
     }
+    public async updateMusicUrls() {
+        const { ctx, service } = this;
+        const { music_info, id } = ctx.request.body;
+        const res = await service.me.music.updateMusicUrls(ctx, id, music_info);
+        ctx.body = res;
+    }
 }

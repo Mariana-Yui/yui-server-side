@@ -5,7 +5,7 @@ import request from '../../utils/request';
 import utils from '../../utils';
 
 export default class MusicService extends Service {
-    private async loginByPhone(query: Record<string, any>) {
+    public async loginByPhone(query: Record<string, any>) {
         const { ctx } = this;
         const { account, music_api_base_url } = ctx.app.config;
         query.cookie.os = 'pc';
@@ -38,7 +38,7 @@ export default class MusicService extends Service {
             return '';
         }
     }
-    private async checkLoginStatus(query: Record<string, any>) {
+    public async checkLoginStatus(query: Record<string, any>) {
         const { ctx } = this;
         const { music_api_base_url } = ctx.app.config;
         try {
