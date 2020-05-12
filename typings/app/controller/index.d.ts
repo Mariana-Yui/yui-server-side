@@ -11,6 +11,7 @@ import ExportAllTopview from '../../../app/controller/all/topview';
 import ExportArticleList from '../../../app/controller/article/list';
 import ExportArticleMusic from '../../../app/controller/article/music';
 import ExportArticlePublish from '../../../app/controller/article/publish';
+import ExportMeArticle from '../../../app/controller/me/article';
 import ExportMeCollection from '../../../app/controller/me/collection';
 import ExportMeLike from '../../../app/controller/me/like';
 import ExportMeLogin from '../../../app/controller/me/login';
@@ -39,6 +40,7 @@ declare module 'egg' {
       publish: ExportArticlePublish;
     }
     me: {
+      article: ExportMeArticle;
       collection: ExportMeCollection;
       like: ExportMeLike;
       login: ExportMeLogin;

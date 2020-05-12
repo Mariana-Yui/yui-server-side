@@ -15,6 +15,7 @@ import ExportAllTopview from '../../../app/service/all/topview';
 import ExportArticleList from '../../../app/service/article/list';
 import ExportArticleMusic from '../../../app/service/article/music';
 import ExportArticlePublish from '../../../app/service/article/publish';
+import ExportMeArticle from '../../../app/service/me/article';
 import ExportMeCollection from '../../../app/service/me/collection';
 import ExportMeLike from '../../../app/service/me/like';
 import ExportMeLogin from '../../../app/service/me/login';
@@ -43,6 +44,7 @@ declare module 'egg' {
       publish: AutoInstanceType<typeof ExportArticlePublish>;
     }
     me: {
+      article: AutoInstanceType<typeof ExportMeArticle>;
       collection: AutoInstanceType<typeof ExportMeCollection>;
       like: AutoInstanceType<typeof ExportMeLike>;
       login: AutoInstanceType<typeof ExportMeLogin>;

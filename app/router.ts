@@ -71,4 +71,10 @@ export default (app: Application) => {
     router.post('/app/me/register/checkUsableEmail', controller.me.register.checkUsableEmail);
     router.post('/app/me/register/checkUsableUserInfo', controller.me.register.checkUsableUserInfo);
     router.post('/app/me/search/getTypedArticles', controller.me.search.getTypedArticles);
+    router.post('/app/me/article/getArticleContent', controller.me.article.getArticleContent);
+    router.post('/app/me/article/subscribeAuthor', controller.me.article.subscribeAuthorOrNot);
+    router.post(
+        '/app/me/article/removeSubscribeAuthor',
+        controller.me.article.subscribeAuthorOrNot
+    );
 };
