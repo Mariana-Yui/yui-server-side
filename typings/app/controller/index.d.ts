@@ -20,6 +20,7 @@ import ExportMeProfile from '../../../app/controller/me/profile';
 import ExportMeRegister from '../../../app/controller/me/register';
 import ExportMeSearch from '../../../app/controller/me/search';
 import ExportMeSpace from '../../../app/controller/me/space';
+import ExportReportIp from '../../../app/controller/report/ip';
 import ExportUserAdmin from '../../../app/controller/user/admin';
 import ExportUserDetail from '../../../app/controller/user/detail';
 import ExportYuiRecommend from '../../../app/controller/yui/recommend';
@@ -49,6 +50,9 @@ declare module 'egg' {
       register: ExportMeRegister;
       search: ExportMeSearch;
       space: ExportMeSpace;
+    }
+    report: {
+      ip: ExportReportIp;
     }
     user: {
       admin: ExportUserAdmin;

@@ -77,4 +77,11 @@ export default (app: Application) => {
         '/app/me/article/removeSubscribeAuthor',
         controller.me.article.subscribeAuthorOrNot
     );
+    router.get('/app/me/article/addArticleViews', controller.me.article.addArticleViews);
+    router.post('/app/me/article/publishComment', controller.me.article.publishComment);
+    router.post('/app/me/article/deleteComment', controller.me.article.deleteComment);
+    router.post('/app/me/article/likeComment', controller.me.article.likeCommentOrNot);
+    router.post('/app/me/article/removeLikeComment', controller.me.article.likeCommentOrNot);
+
+    router.get('/app/report/reportLocation', controller.report.ip.setLastLoginLocation);
 };

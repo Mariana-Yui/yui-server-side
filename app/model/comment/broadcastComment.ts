@@ -9,7 +9,7 @@ export default (app: Application) => {
         content: { type: String, required: true },
         is_top: { type: Boolean, default: false },
         enable: { type: Boolean, default: true },
-        likes: { type: Number, default: 0 },
+        likes: [{ type: Schema.Types.ObjectId, ref: 'Admin' }],
         replay: [{ type: Schema.Types.ObjectId, ref: 'BroadcastComment' }]
     });
 
@@ -20,6 +20,8 @@ export default (app: Application) => {
         create_time = moment(create_time).format('YYYY-MM-DD HH:MM:SS');
         return create_time;
     });
+
+    BroadcastCommentSchema.set('toObject', { getters: true, virtuals: true });
 
     const BroadcastComment = model('BroadcastComment', BroadcastCommentSchema);
 
